@@ -1,14 +1,18 @@
 import cors from "cors";
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application } from "express";
+import bookRoutes from "./app/modules/book/book.route";
 
 const app: Application = express();
 
 // using cors
 app.use(cors());
 
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("Hello world");
-  next();
-});
+app.use(express.urlencoded({ extended: true }));
+
+// parse data
+app.use(express.json());
+
+// Book route
+app.use("/api/v1/book", bookRoutes);
 
 export default app;
