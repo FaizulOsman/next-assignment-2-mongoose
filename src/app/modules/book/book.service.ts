@@ -25,7 +25,7 @@ export const getBooksByGenreAndPublisherFromDB = async (): Promise<IBook[]> => {
 
 // Task 5: Update price string to integer
 export const updatePriceStrToIntToDB = async () => {
-  const books = await Book.updateMany({}, [
+  const books = await Book.updateMany({ publicationYear: { $gt: 2020 } }, [
     {
       $set: {
         price: { $toInt: "$price" },
