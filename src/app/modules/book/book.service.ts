@@ -13,6 +13,3 @@ export const getBookByGenreFromDB = async (): Promise<IBook[]> => {
 
   return books;
 };
-// db.books.aggregate([
-//   {$match: {genre: "Fantasy"}}
-// ])
