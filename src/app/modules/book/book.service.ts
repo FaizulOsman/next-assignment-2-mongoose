@@ -13,3 +13,12 @@ export const getBookByGenreFromDB = async (): Promise<IBook[]> => {
 
   return books;
 };
+
+// Task 3: Get books by {genre: "Fantasy", publisher: "Roli Books"}
+export const getBooksByGenreAndPublisherFromDB = async (): Promise<IBook[]> => {
+  const books = await Book.aggregate([
+    { $match: { genre: "Sci-Fi", "publisher.name": "Roli Books" } },
+  ]);
+
+  return books;
+};
