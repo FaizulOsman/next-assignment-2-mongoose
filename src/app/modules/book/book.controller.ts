@@ -3,6 +3,7 @@ import {
   getBookFromDB,
   getBookByGenreFromDB,
   getBooksByGenreAndPublisherFromDB,
+  updatePriceStrToIntToDB,
 } from "./book.service";
 
 export const getBooks = async (
@@ -32,13 +33,27 @@ export const getBooksByGenre = async (
   });
 };
 
-// Task 2: Get books by genre and publisher
+// Task 3: Get books by genre and publisher
 export const getBooksByGenreAndPublisher = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const book = await getBooksByGenreAndPublisherFromDB();
+
+  res.status(200).json({
+    status: "success",
+    data: book,
+  });
+};
+
+// Task 5: Update price string to integer
+export const updatePriceStrToInt = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const book = await updatePriceStrToIntToDB();
 
   res.status(200).json({
     status: "success",
