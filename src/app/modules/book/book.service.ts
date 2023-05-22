@@ -6,3 +6,13 @@ export const getBookFromDB = async (): Promise<IBook[]> => {
 
   return books;
 };
+
+// Task 2: Get books by {genre: Fantasy}
+export const getBookByGenreFromDB = async (): Promise<IBook[]> => {
+  const books = await Book.aggregate([{ $match: { genre: "Fantasy" } }]);
+
+  return books;
+};
+// db.books.aggregate([
+//   {$match: {genre: "Fantasy"}}
+// ])
