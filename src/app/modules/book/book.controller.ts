@@ -4,6 +4,7 @@ import {
   getBookByGenreFromDB,
   getBooksByGenreAndPublisherFromDB,
   updatePriceStrToIntToDB,
+  addFeaturedToDB,
 } from "./book.service";
 
 export const getBooks = async (
@@ -40,6 +41,20 @@ export const getBooksByGenreAndPublisher = async (
   next: NextFunction
 ) => {
   const book = await getBooksByGenreAndPublisherFromDB();
+
+  res.status(200).json({
+    status: "success",
+    data: book,
+  });
+};
+
+// Task 4: static method => featured: "BestSeller" or "Popular"
+export const addFeatured = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const book = await addFeaturedToDB();
 
   res.status(200).json({
     status: "success",
