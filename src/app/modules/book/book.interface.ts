@@ -1,5 +1,6 @@
 import { HydratedDocument, Model } from "mongoose";
 
+// Create Book Interface
 export interface IBook {
   // _id?: string;
   title: string;
@@ -28,10 +29,10 @@ export interface IBook {
   price: number | string;
 }
 
+// Task 4: static method => featured: "BestSeller" or "Popular"
 export interface IBookMethods {
   featured(): any;
 }
-
 export interface BookModel extends Model<IBook, {}, IBookMethods> {
   addFeatured(): Promise<HydratedDocument<IBook, IBookMethods>>;
 }

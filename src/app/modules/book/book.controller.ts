@@ -7,6 +7,7 @@ import {
   addFeaturedToDB,
 } from "./book.service";
 
+// Task 1: Get all books
 export const getBooks = async (
   req: Request,
   res: Response,

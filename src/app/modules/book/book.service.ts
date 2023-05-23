@@ -1,6 +1,7 @@
 import { IBook } from "./book.interface";
 import { Book } from "./book.model";
 
+// Task 1: Get all books
 export const getBookFromDB = async (): Promise<IBook[]> => {
   const books = await Book.find();
 

@@ -10,6 +10,7 @@ import {
 const router = express.Router();
 
 /* =============== Routes =============== */
+// Task 1: Get all books
 router.get("/", getBooks);
 // Task 2: Get books by genre
 router.get("/genre", getBooksByGenre);
