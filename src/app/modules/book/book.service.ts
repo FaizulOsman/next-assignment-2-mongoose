@@ -25,19 +25,24 @@ export const getBooksByGenreAndPublisherFromDB = async (): Promise<IBook[]> => {
 
 // Task 4: static method => featured: "BestSeller" or "Popular"
 export const addFeaturedToDB = async () => {
-  const addFeaturedUsingRating = await Book.aggregate([
-    {
-      $match: { rating: { $gte: 4 } },
-    },
-    {
-      $addFields: {
-        featured: {
-          $cond: [{ $gte: ["$rating", 4.5] }, "BestSeller", "Popular"],
-        },
-      },
-    },
-  ]);
+  /* ===== Using static method ===== */
+  const addFeaturedUsingRating = await Book.addFeatured();
   return addFeaturedUsingRating;
+
+  /* ===== Using Aggregate ===== */
+  // const addFeaturedUsingRating = await Book.aggregate([
+  //   {
+  //     $match: { rating: { $gte: 4 } },
+  //   },
+  //   {
+  //     $addFields: {
+  //       featured: {
+  //         $cond: [{ $gte: ["$rating", 4.5] }, "BestSeller", "Popular"],
+  //       },
+  //     },
+  //   },
+  // ]);
+  // return addFeaturedUsingRating;
 };
 
 // Task 5: Update price string to integer

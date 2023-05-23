@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
-import { IBook } from "./book.interface";
+import { BookModel, IBook, IBookMethods } from "./book.interface";
 
-export const bookSchema = new Schema<IBook>({
-  //   id: { type: String, required: true, unique: true },
+export const bookSchema = new Schema<IBook, BookModel, IBookMethods>({
+  // id: { type: String, required: true, unique: true },
   title: { type: String, required: true },
   author: { type: [String], required: true },
   genre: { type: String, required: true },
@@ -39,4 +39,24 @@ export const bookSchema = new Schema<IBook>({
   price: { type: Number, required: true },
 });
 
-export const Book = model<IBook>("Book", bookSchema);
+bookSchema.static("addFeatured", async function addFeatured() {
+  const filter = { rating: { $gte: 4 } };
+  const update = {
+    $set: {
+      featured: "Popular",
+    },
+  };
+  const featuredBooks = await this.collection.updateMany(filter, update);
+
+  const filter2 = { rating: { $gte: 4.5 } };
+  const update2 = {
+    $set: {
+      featured: "BestSeller",
+    },
+  };
+  const featuredBooks2 = await this.collection.updateMany(filter2, update2);
+
+  return [featuredBooks, featuredBooks2];
+});
+
+export const Book = model<IBook, BookModel>("Book", bookSchema);
